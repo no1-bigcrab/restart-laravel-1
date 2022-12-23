@@ -23,6 +23,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('register', [RegisterController::class, 'register']);
 Route::post('login', [RegisterController::class, 'login']);
 
+Route::middleware('auth:api')->group( function () {
+    Route::resource('products', ProductController::class);
+});
+
 Route::prefix('posts')->group(function(){
     Route::get('/', [PostController::class, 'index'])->name('post-index');
     Route::get('/{id}', [PostController::class, 'show'])->name('post-by-id');
