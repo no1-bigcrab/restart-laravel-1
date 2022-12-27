@@ -23,7 +23,12 @@ class RegisterController extends BaseController
 
     public function login(LoginRequest $request)
     {
-        if(Auth::attempt(['email' => $request->email, 'password' => $request->password])){ 
+        if(Auth::attempt(
+            [
+                'email' => $request->email,
+                'password' => $request->password
+            ]
+        )){ 
             $user = Auth::user();
             $success['token'] =  $user->createToken('MyApp')-> accessToken;
             $success['name'] =  $user->name;
@@ -32,5 +37,6 @@ class RegisterController extends BaseController
         } 
         else{ 
             return $this->sendError('Unauthorised.', ['error'=>'Unauthorised']);
-        }     }
+        }     
+    }
 }

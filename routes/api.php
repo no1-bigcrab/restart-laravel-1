@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\Admin\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,7 +25,11 @@ Route::post('register', [RegisterController::class, 'register']);
 Route::post('login', [RegisterController::class, 'login']);
 
 Route::middleware('auth:api')->group( function () {
-    Route::resource('products', ProductController::class);
+    Route::get('products', [ProductController::class, "index"])->name('index-product');
+    Route::get('products/{id}', [ProductController::class, "show"])->name('show-product');
+    Route::post('products/create', [ProductController::class, "create"])->name('create-product');
+    Route::post('products/update/{id}', [ProductController::class, "update"])->name('update-product');
+    Route::delete('products/delete/{id}', [ProductController::class, "delete"])->name('delete-product');
 });
 
 Route::prefix('posts')->group(function(){
