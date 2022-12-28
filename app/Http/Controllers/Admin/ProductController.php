@@ -29,6 +29,7 @@ class ProductController extends Controller
     public function show($id)
     {
         $data = $this->productRepository->getProductById($id);
+        dd($data->categories->title);
         return response()->json(
             [
                 'message' => 'get data success',
