@@ -28,7 +28,6 @@ class RegisterUserRequest extends FormRequest
             'email' => 'required|email|unique:users',
             'password' => 'required',
             'c_password' => 'required|same:password',
-            'role_id'   => 'required'
         ];
     }
 }
